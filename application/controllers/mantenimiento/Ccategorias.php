@@ -79,14 +79,37 @@ class Ccategorias extends CI_Controller {
 			'descripcion'=>$descripcion 
 			);
 
-
 		if($this->Mcategorias->updateCategorias($id,$data)){
 			redirect(base_url()."mantenimiento/Ccategorias");
 		}else{
 			$this->session->set_flashdata("error","No se pudo guardar la Categoria");
 			redirect(base_url()."mantenimiento/Ccategorias/preUpdate/".$id);
-
 		}
+	}
+
+
+	/*pasa los datos a traves del metodo Ajax desde la vista y los devuelve a estos*/
+	public function view($id){
+
+		/*trae el reg. del modelo*/
+		$data = array(
+			'categoria' => $this->Mcategorias->getId($id)
+		);
+
+		/*envia la data a la vista*/
+		$this->load->view("admin/categorias/view",$data);
+	}
+
+
+
+	public function delete($id){
+
+		$data = array(
+			'estado'=>"0"
+		);
+
+		$row = $this->Mcategorias->updateCategorias($id,$data);
+	    echo "mantenimiento/Ccategorias";
 	}
 
 
