@@ -109,6 +109,8 @@ class Ccategorias extends CI_Controller {
 		);
 
 		$row = $this->Mcategorias->updateCategorias($id,$data);
+
+		/*le paso la ruta como respuesta al ajax*/
 	    echo "mantenimiento/Ccategorias";
 	}
 

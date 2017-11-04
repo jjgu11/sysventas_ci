@@ -24,7 +24,14 @@
 <script src="<?php echo base_url();?>assets/template/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>assets/template/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
+
+
 $(document).ready(function () {
+
+    /******************************************************/
+    /*******************  CATEGORIA ***********************/
+    /******************************************************/
+
 
     /*Metodo Ajax para obtener la info de la  Categoria*/ 
     var base_url = "<?php echo base_url(); ?>";
@@ -63,6 +70,78 @@ $(document).ready(function () {
     });
     /* Fin Ajax*/
 
+    /******************************************************/
+    /*******************  FIN CATEGORIA *******************/
+    /******************************************************/
+
+
+    
+
+    /******************************************************/
+    /********************  CLIENTE ************************/
+    /******************************************************/
+
+    $(".btn-viewc").on("click",function(){
+
+        let cliente = $(this).val();
+        alert(cliente);
+
+        let dataCliente = cliente.split("*");
+
+        p ="<p><strong>Nombre: </strong>"+dataCliente[0]+"</p>"
+        p +="<p><strong>Apellidos: </strong>"+dataCliente[1]+"</p>"
+        p +="<p><strong>Telefono: </strong>"+dataCliente[2]+"</p>"
+        p +="<p><strong>Direccion: </strong>"+dataCliente[3]+"</p>"
+        p +="<p><strong>Ruc: </strong>"+dataCliente[4]+"</p>"
+        p +="<p><strong>Empresa: </strong>"+dataCliente[5]+"</p>"
+
+        $("#modal-default .modal-body").html(p);
+
+    })
+
+
+
+    /*Metodo Ajax para obtener la info de la  Categoria*/ 
+    /*var base_url = "<?php //echo base_url(); ?>";
+
+    $(".btn-viewc").on("click",function(){
+
+        let id = $(this).val();
+
+        $.ajax({
+            url: base_url+"mantenimiento/Cclientes/view/"+id,
+            type: "POST",
+            success:function(response){
+                $("#modal-default .modal-body").html(response);
+                //alert(response);
+
+            }
+        });
+    });*/
+
+    /*Metodo Ajax para eliminar la cliente*/ 
+    $(".btn-deletec").on("click",function(e){
+
+        e.preventDefault();
+        let ruta = $(this).attr("href");
+        console.log(ruta);    
+
+        $.ajax({
+            url: ruta,
+            type: "POST",
+            success:function(response){
+               window.location.href= base_url+response;
+                //console.log(response);
+            }
+        });
+    });
+    /* Fin Ajax*/
+
+    /******************************************************/
+    /******************* FIN CLIENTE **********************/
+    /******************************************************/
+
+
 	$('#example1').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
@@ -80,6 +159,8 @@ $(document).ready(function () {
             },
         }
     });
+
+$('[data-toggle="tooltip"]').tooltip();     
     
 $('.sidebar-menu').tree()
 })

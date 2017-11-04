@@ -41,26 +41,28 @@
                                         <?php
                                         /*si no esta vacia paso a recorrerlo*/ 
                                         if(!empty($cliente)): ?>
-                                            <?php foreach($cliente as $cat): ?>
+                                            <?php foreach($cliente as $cli): ?>
                                         <tr>
-                                            <td><?php echo $cat->id; ?></td>
-                                            <td><?php echo $cat->nombres; ?></td>
-                                            <td><?php echo $cat->apellidos; ?></td>
-                                            <td><?php echo $cat->telefono; ?></td>
-                                            <td><?php echo $cat->direccion; ?></td>
-                                            <td><?php echo $cat->ruc; ?></td>
-                                            <td><?php echo $cat->empresa; ?></td>
+                                            <td><?php echo $cli->id; ?></td>
+                                            <td><?php echo $cli->nombres; ?></td>
+                                            <td><?php echo $cli->apellidos; ?></td>
+                                            <td><?php echo $cli->telefono; ?></td>
+                                            <td><?php echo $cli->direccion; ?></td>
+                                            <td><?php echo $cli->ruc; ?></td>
+                                            <td><?php echo $cli->empresa; ?></td>
+
+                                            <?php $dataCliente = $cli->id."*".$cli->nombres."*".$cli->apellidos."*".$cli->telefono."*".$cli->direccion."*".$cli->ruc."*".$cli->empresa ?>
 
                                             <td>
                                                 <div class="btn-group">
 
-                                                    <button type="button" class="btn btn-info btn-view" data-toggle="modal" data-target="#modal-default" value="<?php echo $cat->id; ?>">
+                                                    <button type="button" class="btn btn-info btn-viewc" data-toggle="modal" data-target="#modal-default" value="<?php echo $dataCliente; ?>" data-toggle="tooltip" data-placement="left" title="Ver Informacion" >
                                                     <span class="fa fa-eye"></span>
                                                     </button>
                                                             
-                                                     <a href="<?php echo base_url(); ?>mantenimiento/Cclientes/preUpdate/<?php echo $cat->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
+                                                     <a data-toggle="tooltip" data-placement="top" title="Editar" href="<?php echo base_url(); ?>mantenimiento/Cclientes/preUpdate/<?php echo $cli->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
 
-                                                     <a href="<?php echo base_url(); ?>mantenimiento/Cclientes/delete/<?php  echo $cat->id;?>" class="btn btn-danger btn-delete" value="<?php echo $cat->id;?>"><span class="fa fa-remove"></span></a>
+                                                     <a data-toggle="tooltip" data-placement="right" title="Remover" href="<?php echo base_url(); ?>mantenimiento/Cclientes/delete/<?php  echo $cli->id;?>" class="btn btn-danger btn-deletec" value="<?php echo $cli->id;?>"><span class="fa fa-remove"></span></a>
                                                 </div>
                                             </td>
                                         </tr>

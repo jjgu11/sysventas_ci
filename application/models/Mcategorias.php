@@ -27,6 +27,7 @@ class Mcategorias extends CI_Model {
 		return $rst->row();
 	}
 
+	/*Actualiza y elimina las categorias*/
 	public function updateCategorias($id,$data){
 
 		$this->db->where('id',$id);
