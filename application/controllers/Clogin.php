@@ -6,11 +6,14 @@ class Clogin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Mlogin');
+
 	}
 	
 
 	public function index()
 	{	
+		/*pasamos la libreria  05/11/17 */
+		$this->load->library('Recaptcha');
 
 		# si existe la variable de session ? redirecciona
 		if ($this->session->userdata('login')) {
@@ -19,7 +22,10 @@ class Clogin extends CI_Controller {
 
 		} else {
 			
+			/*pasamos la libreria  05/11/17 */
+			$this->load->library('Recaptcha');
 			$this->load->view('admin/login');
+				
 		}	
 
 	}
@@ -27,7 +33,26 @@ class Clogin extends CI_Controller {
 
 	public function login(){
 
-		$user = $this->input->post('user');
+
+		// Load the library
+		$this->load->library('recaptcha');
+
+		// Catch the user's answer
+		$captcha_answer = $this->input->post('g-recaptcha-response');
+
+		// Verify user's answer
+		$response = $this->recaptcha->verifyResponse($captcha_answer);
+
+		// Processing ...
+		if ($response['success']) {
+		    $this->load->view('validado');
+		} else {
+		    //redirect('Crecaptcha');
+		    // var_dump($response);
+		    echo "no se valido";
+		}
+
+		/*$user = $this->input->post('user');
 		$password = $this->input->post('password');
 
 		#almacena los resultados traidos del Modelo
@@ -55,7 +80,7 @@ class Clogin extends CI_Controller {
 			//var_dump($result);
 			//var_dump($data);
 			redirect(base_url().'Cdashboard');
-		}
+		}*/
 
 	}/*--- Fin login ---*/
 

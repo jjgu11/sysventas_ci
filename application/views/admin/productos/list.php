@@ -4,7 +4,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                Categoria
+                PRODUCTOS
                 <small>Listado</small>
                 </h1>
             </section>
@@ -15,39 +15,50 @@
                     <div class="box-body">
                         <div class="row">
                           <div class="col-md-12 text-center">
-                              <a href="<?php echo base_url();?>mantenimiento/Ccategorias/addCat" class="btn btn-success btn-flat"><span class="fa fa-plus"></span>Agregar Categorias</a>
+                              <a href="<?php echo base_url();?>mantenimiento/Cproductos/addPro" class="btn btn-success btn-flat "><span class="fa fa-plus"></span>Agregar Productos</a>
                           </div>  
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <table id="example1" class="table table-bordered table-hover">
+
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>NOMBRE</th>
                                             <th>DESCRIPCION</th>
+                                            <th>PRECIO</th>
+                                            <th>STOCK</th>
+                                            <th>CATEGORIA</th>
                                             <th>OPCIONES</th>
-
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         
                                         <?php
                                         /*si no esta vacia paso a recorrerlo*/ 
-                                        if(!empty($categorias)): ?>
-                                            <?php foreach($categorias as $cat): ?>
+                                        if(!empty($productos)): ?>
+                                            <?php foreach($productos as $pro): ?>
                                         <tr>
-                                            <td><?php echo $cat->id; ?></td>
-                                            <td><?php echo $cat->nombre; ?></td>
-                                            <td><?php echo $cat->descripcion; ?></td>
+                                            <td><?php echo $pro->id; ?></td>
+                                            <td><?php echo $pro->nombre; ?></td>
+                                            <td><?php echo $pro->descripcion; ?></td>
+                                            <td><?php echo $pro->precio; ?></td>
+                                            <td><?php echo $pro->stock; ?></td>
+                                            <td><?php echo $pro->categoria; ?></td>
+                                        
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-view" data-toggle="modal" data-target="#modal-default" value="<?php echo $cat->id; ?>">
+
+                                                    <button type="button" class="btn btn-info btn-viewc" data-toggle="modal" data-target="#modal-default" value="" data-toggle="tooltip" data-placement="left" title="Ver Informacion" >
                                                     <span class="fa fa-eye"></span>
                                                     </button>
-                                                     <a href="<?php echo base_url(); ?>mantenimiento/Ccategorias/preUpdate/<?php echo $cat->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
-                                                     <a href="<?php echo base_url(); ?>mantenimiento/Ccategorias/delete/<?php  echo $cat->id;?>" class="btn btn-danger btn-delete" value="<?php echo $cat->id;?>"><span class="fa fa-remove"></span></a>
+                                                            
+                                                     <a data-toggle="tooltip" data-placement="top" title="Editar" href="<?php echo base_url(); ?>mantenimiento/Cproductos/preUpdate/<?php echo $pro->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
+
+                                                     <a data-toggle="tooltip" data-placement="right" title="Remover" href="<?php echo base_url(); ?>mantenimiento/Cproductos/delete/<?php  echo $pro->id;?>" class="btn btn-danger btn-deletec"><span class="fa fa-remove"></span></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -73,10 +84,10 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Informacion de la Categoria</h4>
+                <h4 class="modal-title">Informacion de los Productos</h4>
               </div>
               <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -88,4 +99,3 @@
           <!-- /.modal-dialog -->
         </div>
         <!-- /.modal -->
-

@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes"><button type="submit" class="btn btn-danger btn-flat">Regresar</button></a>
+                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes" class="btn btn-danger btn-flat">Regresar</a>
                                     </div>
                                 </form>
                                <!-- Formulario Agregar -->

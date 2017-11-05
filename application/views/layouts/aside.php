@@ -22,7 +22,7 @@
                         <ul class="treeview-menu">
                             <li><a href="<?php echo base_url(); ?>mantenimiento/Ccategorias"><i class="fa fa-circle-o"></i> Categorias</a></li>
                             <li><a href="<?php echo base_url(); ?>mantenimiento/Cclientes"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Productos</a></li>
+                            <li><a href="<?php echo base_url(); ?>mantenimiento/Cproductos"><i class="fa fa-circle-o"></i> Productos</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
