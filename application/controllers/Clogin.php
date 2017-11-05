@@ -49,7 +49,7 @@ class Clogin extends CI_Controller {
 		} else {
 		    //redirect('Crecaptcha');
 		    // var_dump($response);
-		    echo "no se valido";
+		    echo "no se valido el captcha";
 		}
 
 		/*$user = $this->input->post('user');
