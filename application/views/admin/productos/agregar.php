@@ -4,8 +4,8 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                Categoria
-                <small>Editar</small>
+                Productos
+                <small>/ Agregar</small>
                 </h1>
             </section>
             <!-- Main content -->
@@ -24,20 +24,40 @@
 
                                 <?php endif; ?>
 
-                                <form action="<?php echo base_url();?>mantenimiento/Ccategorias/update" method="POST">
-                                    <!-- -->   
-                                    <input type="hidden" value="<?php echo $categoria->id ?>" name="id">
+                                <form action="<?php echo base_url();?>mantenimiento/Cproductos/insertar" method="POST">
                                     <div class="form-group">
                                         <label for="nombre">Nombre:</label>
-                                        <input type="text" class="form-control" name="nombre" value="<?php echo $categoria->nombre ?>">
+                                        <input type="text" class="form-control" name="nombre">
                                     </div>
                                     <div class="form-group">
                                         <label for="descripcion">Descripcion:</label>
-                                        <input type="text" class="form-control" name="descripcion" value="<?php echo $categoria->descripcion ?>">
+                                        <input type="text" class="form-control" name="descripcion">
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success btn-flat" >Actualizar</button>
-                                         <a href="<?php echo base_url();?>mantenimiento/Ccategorias" class="btn btn-danger btn-flat pull-right">Regresar</a>
+                                        <label for="precio">Precio:</label>
+                                        <input type="text" class="form-control" name="precio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="stock">stock:</label>
+                                        <input type="text" class="form-control" name="stock">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="descripcion">Categoria:</label>
+
+                                        <select name="categoria" id="categoria" class="form-control">
+                                            <?php foreach ($categorias as $cat):?> 
+                                                <option value="<?php echo $cat->id; ?>">
+                                                    <?php echo $cat->nombre; ?>
+                                                </option>
+                                             <?php endforeach; ?>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                        <a href="<?php echo base_url();?>mantenimiento/CProductos" class="btn btn-danger btn-flat pull-right">Regresar</a>
                                     </div>
                                 </form>
                                

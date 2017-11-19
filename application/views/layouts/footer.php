@@ -88,12 +88,12 @@ $(document).ready(function () {
 
         let dataCliente = cliente.split("*");
 
-        p ="<p><strong>Nombre: </strong>"+dataCliente[0]+"</p>"
-        p +="<p><strong>Apellidos: </strong>"+dataCliente[1]+"</p>"
-        p +="<p><strong>Telefono: </strong>"+dataCliente[2]+"</p>"
-        p +="<p><strong>Direccion: </strong>"+dataCliente[3]+"</p>"
-        p +="<p><strong>Ruc: </strong>"+dataCliente[4]+"</p>"
-        p +="<p><strong>Empresa: </strong>"+dataCliente[5]+"</p>"
+        p ="<p><strong>Nombre: </strong>"+dataCliente[1]+"</p>"
+        p +="<p><strong>Apellidos: </strong>"+dataCliente[2]+"</p>"
+        p +="<p><strong>Telefono: </strong>"+dataCliente[3]+"</p>"
+        p +="<p><strong>Direccion: </strong>"+dataCliente[4]+"</p>"
+        p +="<p><strong>Ruc: </strong>"+dataCliente[5]+"</p>"
+        p +="<p><strong>Empresa: </strong>"+dataCliente[6]+"</p>"
 
         $("#modal-default .modal-body").html(p);
 
@@ -141,6 +141,38 @@ $(document).ready(function () {
     /******************* FIN CLIENTE **********************/
     /******************************************************/
 
+
+    /******************************************************/
+    /********************  PRODUCTO ************************/
+    /******************************************************/
+
+    $(".btn-viewp").on("click",function(){
+
+        let producto = $(this).val();
+        alert(producto);
+
+        let dataProducto = producto.split("*");
+
+        p ="<h3>Nombre:  <span class='label label-success'>"+dataProducto[1]+"</span></h3>"
+        p +="<h3>Descripcion:  <span class='label label-success'>"+dataProducto[2]+"</span></h3>"
+        p +="<h3>Precio:  <span class='label label-success'>"+dataProducto[3]+"</span></h3>"
+        p +="<h3>Stock:  <span class='label label-success'>"+dataProducto[4]+"</span></h3>"
+        p +="<h3>Categoria:  <span class='label label-success'>"+dataProducto[5]+"</span></h3>"
+
+
+        $("#modal-default .modal-body").html(p);
+
+    })
+
+
+
+
+
+
+
+    /******************************************************/
+    /****************** FIN PRODUCTO **********************/
+    /******************************************************/
 
 	$('#example1').DataTable({
         "language": {

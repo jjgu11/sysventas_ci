@@ -13,4 +13,31 @@ class Mproductos extends CI_Model {
 		$data = $this->db->get();
 		return $data->result();
 	}
+
+	/*Inserta la new Productos*/
+	public function createProductos($data){
+
+		return $this->db->insert('productos',$data);
+
+	}
+
+	/*Obtiene el Id para Editar*/
+	public function getId($id){
+
+		$this->db->where('id',$id);
+		$rst= $this->db->get("productos");
+
+		return $rst->row();
+	}
+
+	/*Actualiza y elimina los Productos*/
+	public function updateProductos($id,$data){
+
+		$this->db->where('id',$id);
+		$row = $this->db->update("productos",$data);
+
+		//retorna un boolean
+		return $row;
+	}
+
 }	

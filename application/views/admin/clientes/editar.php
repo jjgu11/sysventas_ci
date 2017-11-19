@@ -16,11 +16,14 @@
                         <div class="row">
                         <div class="col-md-3"></div>
                             <div class="col-md-6">
-
-
-
-
                                 
+                                <?php if($this->session->flashdata("error")):?>
+                                <div class="alert alert-danger alert-dismissible">
+                                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> 
+                                  <p><i class="icon fa fa-ban"></i><?php $this->session->flashdata("error") ?></p>   
+                                </div>
+
+                                <?php endif; ?>
 
                                 <!-- Formulario Agregar -->
                                 <form action="<?php echo base_url();?>mantenimiento/Cclientes/update" method="POST">
@@ -53,7 +56,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes"><button class="btn btn-danger btn-flat">Regresar</button></a>
+                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes" class="btn btn-danger btn-flat pull-right">Regresar</a>
                                     </div>
                                 </form>
                                <!-- Formulario Agregar -->

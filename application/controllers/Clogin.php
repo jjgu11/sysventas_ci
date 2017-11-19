@@ -35,7 +35,7 @@ class Clogin extends CI_Controller {
 
 
 		// Load the library
-		$this->load->library('recaptcha');
+		/*$this->load->library('recaptcha');
 
 		// Catch the user's answer
 		$captcha_answer = $this->input->post('g-recaptcha-response');
@@ -50,9 +50,9 @@ class Clogin extends CI_Controller {
 		    //redirect('Crecaptcha');
 		    // var_dump($response);
 		    echo "no se valido el captcha";
-		}
+		}*/
 
-		/*$user = $this->input->post('user');
+		$user = $this->input->post('user');
 		$password = $this->input->post('password');
 
 		#almacena los resultados traidos del Modelo
@@ -80,7 +80,7 @@ class Clogin extends CI_Controller {
 			//var_dump($result);
 			//var_dump($data);
 			redirect(base_url().'Cdashboard');
-		}*/
+		}
 
 	}/*--- Fin login ---*/
 

@@ -5,7 +5,7 @@
             <section class="content-header">
                 <h1>
                 PRODUCTOS
-                <small>Listado</small>
+                <span class="label label-success"> Listado</span>
                 </h1>
             </section>
             <!-- Main content -->
@@ -48,16 +48,21 @@
                                             <td><?php echo $pro->precio; ?></td>
                                             <td><?php echo $pro->stock; ?></td>
                                             <td><?php echo $pro->categoria; ?></td>
-                                        
+
+                                            <?php $dataProducto = $pro->id."*".$pro->nombre."*".$pro->descripcion."*".$pro->precio."*".$pro->stock."*".$pro->categoria ?>
+
                                             <td>
                                                 <div class="btn-group">
-
-                                                    <button type="button" class="btn btn-info btn-viewc" data-toggle="modal" data-target="#modal-default" value="" data-toggle="tooltip" data-placement="left" title="Ver Informacion" >
+                                                    
+                                                    <!-- Ver info -->
+                                                    <button type="button" class="btn btn-info btn-viewp" data-toggle="modal" data-target="#modal-default" value="<?php echo $dataProducto ?>" data-toggle="tooltip" data-placement="left" title="Ver Informacion" >
                                                     <span class="fa fa-eye"></span>
                                                     </button>
-                                                            
+                                                    
+                                                    <!-- Editar -->        
                                                      <a data-toggle="tooltip" data-placement="top" title="Editar" href="<?php echo base_url(); ?>mantenimiento/Cproductos/preUpdate/<?php echo $pro->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
-
+                                                    
+                                                    <!-- Eliminar --> 
                                                      <a data-toggle="tooltip" data-placement="right" title="Remover" href="<?php echo base_url(); ?>mantenimiento/Cproductos/delete/<?php  echo $pro->id;?>" class="btn btn-danger btn-deletec"><span class="fa fa-remove"></span></a>
                                                 </div>
                                             </td>
