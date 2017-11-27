@@ -25,21 +25,29 @@
                                 <?php endif; ?>
 
                                 <form action="<?php echo base_url();?>mantenimiento/Cproductos/insertar" method="POST">
-                                    <div class="form-group">
+
+                                    <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error': ''; ?>">
                                         <label for="nombre">Nombre:</label>
-                                        <input type="text" class="form-control" name="nombre">
+                                        <input type="text" class="form-control" name="nombre" value="<?php echo set_value('nombre') ?>">
+                                        <?php echo form_error("nombre","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="form-group <?php echo !empty(form_error("descripcion"))? 'has-error': ''; ?>">
                                         <label for="descripcion">Descripcion:</label>
-                                        <input type="text" class="form-control" name="descripcion">
+                                        <input type="text" class="form-control" name="descripcion" value="<?php echo set_value('descripcion') ?>">
+                                        <?php echo form_error("descripcion","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="form-group <?php echo !empty(form_error("precio"))? 'has-error': ''; ?>">
                                         <label for="precio">Precio:</label>
-                                        <input type="text" class="form-control" name="precio">
+                                        <input type="text" class="form-control" name="precio" value="<?php echo set_value('precio') ?>">
+                                        <?php echo form_error("precio","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="form-group <?php echo !empty(form_error("stock"))? 'has-error': ''; ?>">
                                         <label for="stock">stock:</label>
-                                        <input type="text" class="form-control" name="stock">
+                                        <input type="text" class="form-control" name="stock" value="<?php echo set_value('stock') ?>">
+                                        <?php echo form_error("stock","<span class='help-block'>","</span>" ); ?>
                                     </div>
 
                                     <div class="form-group">

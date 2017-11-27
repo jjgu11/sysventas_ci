@@ -63,7 +63,7 @@
                                                      <a data-toggle="tooltip" data-placement="top" title="Editar" href="<?php echo base_url(); ?>mantenimiento/Cproductos/preUpdate/<?php echo $pro->id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
                                                     
                                                     <!-- Eliminar --> 
-                                                     <a data-toggle="tooltip" data-placement="right" title="Remover" href="<?php echo base_url(); ?>mantenimiento/Cproductos/delete/<?php  echo $pro->id;?>" class="btn btn-danger btn-deletec"><span class="fa fa-remove"></span></a>
+                                                     <a data-toggle="tooltip" data-placement="right" title="Remover" href="<?php echo base_url(); ?>mantenimiento/Cproductos/delete/<?php  echo $pro->id;?>" class="btn btn-danger btn-deletep"><span class="fa fa-remove"></span></a>
                                                 </div>
                                             </td>
                                         </tr>

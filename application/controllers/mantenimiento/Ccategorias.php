@@ -24,7 +24,7 @@ class Ccategorias extends CI_Controller {
 
 	}
 
-	/*Button Agregar Categorias*/
+	/*Button Formulario Agregar Categorias*/
 	public function addCat(){
 
 		$this->load->view('layouts/header');
@@ -39,19 +39,33 @@ class Ccategorias extends CI_Controller {
 		$nombre = $this->input->post('nombre');
 		$des = $this->input->post('descripcion');
 
-		$data = array(
-			'nombre' => $nombre,
-			'descripcion' => $des,
-			'estado' => "1"
-		);
 
-		if ($this->Mcategorias->createCategorias($data)) {
-			redirect(base_url()."mantenimiento/Ccategorias");
-		} else {
-			$this->session->set_flashdata("error","No se pudo guardar la Categoria");
-			redirect(base_url()."mantenimiento/Ccategorias/addCat");
-		}	
+		// regla de validacion (nombre_campo_db, alias_mostrar, validacion)
+		$this->form_validation->set_rules('nombre','Nombre Categoria','required|is_unique[categorias.nombre]');
+
+		if($this->form_validation->run()){
+
+			$data = array(
+				'nombre' => $nombre,
+				'descripcion' => $des,
+				'estado' => "1"
+			);
+
+			if ($this->Mcategorias->createCategorias($data)) {
+				redirect(base_url()."mantenimiento/Ccategorias");
+			} else {
+				$this->session->set_flashdata("error","No se pudo guardar la Categoria");
+				redirect(base_url()."mantenimiento/Ccategorias/addCat");
+			}
+
+		}else{
+
+			//redirige al formulario de agregar categorias
+			$this->addCat();
+		}
 	}
+
+
 
 	/*Obtiene el registro y pasa a la vista para editar*/
 	public function preUpdate($id){
@@ -68,23 +82,46 @@ class Ccategorias extends CI_Controller {
 	}
 
 
+
+	//Obtiene el id del POST 
 	public function update(){
 
 		$id = $this->input->post('id');
 		$nombre = $this->input->post('nombre');
 		$descripcion = $this->input->post('descripcion');
 
-		$data = array(
-			'nombre' => $nombre,
-			'descripcion'=>$descripcion 
+		$categoriaActual = $this->Mcategorias->getId($id);
+
+		//valido si es el mismo registro 
+		if ($nombre == $categoriaActual->nombre) {
+			$unique = '';
+		} else {
+			$unique = '|is_unique[categorias.nombre]';
+		}
+
+		// regla de validacion (nombre_campo_db, alias_mostrar, validacion)
+		$this->form_validation->set_rules('nombre','Nombre Categoria','required'.$unique);
+		
+
+		if ($this->form_validation->run()) {
+
+			//creo un array con los datos del POST
+			$data = array(
+				'nombre' => $nombre,
+				'descripcion'=>$descripcion 
 			);
 
-		if($this->Mcategorias->updateCategorias($id,$data)){
-			redirect(base_url()."mantenimiento/Ccategorias");
-		}else{
-			$this->session->set_flashdata("error","No se pudo guardar la Categoria");
-			redirect(base_url()."mantenimiento/Ccategorias/preUpdate/".$id);
+			if($this->Mcategorias->updateCategorias($id,$data)){
+				redirect(base_url()."mantenimiento/Ccategorias");
+			}else{
+				$this->session->set_flashdata("error","No se pudo guardar la Categoria");
+				redirect(base_url()."mantenimiento/Ccategorias/preUpdate/".$id);
+			}
+
+		} else {
+			$this->preUpdate($id);
 		}
+		
 	}
 
 

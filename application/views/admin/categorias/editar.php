@@ -27,14 +27,19 @@
                                 <form action="<?php echo base_url();?>mantenimiento/Ccategorias/update" method="POST">
                                     <!-- -->   
                                     <input type="hidden" value="<?php echo $categoria->id ?>" name="id">
-                                    <div class="form-group">
+                                    <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error': ''; ?>">
                                         <label for="nombre">Nombre:</label>
-                                        <input type="text" class="form-control" name="nombre" value="<?php echo $categoria->nombre ?>">
+                                        <input type="text" class="form-control" name="nombre" value="<?php echo !empty(form_error("nombre"))? set_value('nombre'): $categoria->nombre ;?>">
+                                        <?php echo form_error("nombre","<span class='help-block'>","</span>" ); ?>
                                     </div>
+
+
                                     <div class="form-group">
                                         <label for="descripcion">Descripcion:</label>
                                         <input type="text" class="form-control" name="descripcion" value="<?php echo $categoria->descripcion ?>">
                                     </div>
+
+
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-flat" >Actualizar</button>
                                          <a href="<?php echo base_url();?>mantenimiento/Ccategorias" class="btn btn-danger btn-flat pull-right">Regresar</a>

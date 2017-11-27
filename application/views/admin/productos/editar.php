@@ -30,24 +30,32 @@
 
                                      <input type="hidden" value="<?php echo $productos->id ?>" name="id">
 
-                                    <div class="form-group">
+                                    <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error': ''; ?>">
                                         <label for="nombre">Nombres:</label>
-                                        <input type="text" class="form-control" name="nombres" value="<?php echo $productos->nombre; ?>">
+                                        <input type="text" class="form-control" name="nombres" value="<?php echo !empty(form_error("nombre"))? set_value('nombre'): $productos->nombre; ?>">
+                                        <?php echo form_error("nombre","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
+
+                                    <div class="form-group <?php echo !empty(form_error("descripcion"))? 'has-error': ''; ?>">
                                         <label for="descripcion">Descripcion:</label>
-                                        <input type="text" class="form-control" name="descripcion" value="<?php echo $productos->descripcion; ?>">
+                                        <input type="text" class="form-control" name="descripcion" value="<?php echo !empty(form_error("descripcion"))? set_value('descripcion'): $productos->descripcion; ?>">
+                                        <?php echo form_error("descripcion","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="descripcion">Precio:</label>
-                                        <input type="text" class="form-control" name="precio" value="<?php echo $productos->precio;?>">
+
+                                    <div class="form-group <?php echo !empty(form_error("precio"))? 'has-error': ''; ?>">
+                                        <label for="precio">Precio:</label>
+                                        <input type="text" class="form-control" name="precio" value="<?php echo !empty(form_error("precio"))? set_value('precio'): $productos->precio;?>">
+                                        <?php echo form_error("precio","<span class='help-block'>","</span>" ); ?>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="descripcion">Stock:</label>
-                                        <input type="text" class="form-control" name="stock" value="<?php echo $productos->stock; ?>">      
+
+                                    <div class="form-group <?php echo !empty(form_error("stock"))? 'has-error': ''; ?>">
+                                        <label for="stock">Stock:</label>
+                                        <input type="text" class="form-control" name="stock" value="<?php echo !empty(form_error("stock"))? set_value('stock'): $productos->stock; ?>">
+                                        <?php echo form_error("stock","<span class='help-block'>","</span>" ); ?>      
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="descripcion">Categoria:</label>
+                                        <label for="Categoria">Categoria:</label>
 
                                         <select name="categoria" id="categoria" class="form-control">
                                             <?php foreach ($categorias as $cat):?>

@@ -97,7 +97,7 @@ $(document).ready(function () {
 
         $("#modal-default .modal-body").html(p);
 
-    })
+    });
 
 
 
@@ -162,7 +162,26 @@ $(document).ready(function () {
 
         $("#modal-default .modal-body").html(p);
 
-    })
+    });
+
+
+    /*Metodo Ajax para eliminar la producto*/ 
+    $(".btn-deletep").on("click",function(e){
+
+        e.preventDefault();
+        let ruta = $(this).attr("href");
+        console.log(ruta);    
+
+        $.ajax({
+            url: ruta,
+            type: "POST",
+            success:function(response){
+               window.location.href= base_url+response;
+                //console.log(response);
+            }
+        });
+    });
+    /* Fin Ajax*/
 
 
 
@@ -173,6 +192,10 @@ $(document).ready(function () {
     /******************************************************/
     /****************** FIN PRODUCTO **********************/
     /******************************************************/
+
+
+
+
 
 	$('#example1').DataTable({
         "language": {
