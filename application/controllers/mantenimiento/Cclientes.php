@@ -27,11 +27,15 @@ class Cclientes extends CI_Controller {
 	/* redirige al formulario para agregar*/
 	public function addCli(){
 
+		$data = [
+			"tipoClientes" => $this->Mclientes->getTipoClientes(),
+			"tipoDocumentos" => $this->Mclientes->getTipoDocumentos()
+		];
+
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/clientes/agregar');
+		$this->load->view('admin/clientes/agregar',$data);
 		$this->load->view('layouts/footer');
-
 
 	}
 
@@ -40,55 +44,70 @@ class Cclientes extends CI_Controller {
 	public function insertar(){
 
 		$nombres = $this->input->post('nombres');
-		$apellidos = $this->input->post('apellidos');
+		$t_cliente = $this->input->post('tipo_cliente');
+		$t_documento = $this->input->post('tipo_documento');
 		$telefono = $this->input->post('telefono');
 		$direccion = $this->input->post('direccion');
-		$ruc = $this->input->post('ruc');
-		$empresa = $this->input->post('empresa');
+		$n_documento = $this->input->post('num_documento');
 
+		#reglas de validaciones
+		$this->form_validation->set_rules("nombres","Nombre del Cliente","required");
+		$this->form_validation->set_rules("tipo_cliente","Tipo de Cliente","required");
+		$this->form_validation->set_rules("tipo_documento","Tipo de Documento","required");
+		$this->form_validation->set_rules("telefono","Telefono del Cliente","required");
+		$this->form_validation->set_rules("direccion","Direccion del Cliente","required");
+		$this->form_validation->set_rules("num_documento","Numero de Documento","required|is_unique[clientes.num_doc]");
 
-		$data = array(
+		#si procede / guarda la informacion
+		if ($this->form_validation->run()) {
+			
+			$data = array(
 			'nombres' => $nombres,
-			'apellidos' => $apellidos,
 			'telefono' => $telefono,
 			'direccion' => $direccion,
-			'ruc' => $ruc,
-			'empresa' => $empresa,
+			'tipo_cli_id' => $t_cliente,
+			'tipo_doc_id' => $t_documento,
+			'num_doc' => $n_documento,
 			'estado' => '1'
-		);
+			);
 
-		if($this->Mclientes->createClientes($data)){
+			if($this->Mclientes->createClientes($data)){
+				redirect(base_url()."mantenimiento/Cclientes") ;
+			}else{
+				$this->session->set_flashdata("error","No se pudo guardar el cliente");
+				redirect(base_url()."mantenimiento/Ccliente/addCli");
+			}
 
-			redirect(base_url()."mantenimiento/Cclientes") ;
-
-		}else{
-
-			$this->session->set_flashdata("error","No se pudo guardar el cliente");
-			redirect(base_url()."mantenimiento/Ccliente/addCli");
-
+		#muestra la vista con los mensages de error en los imputs	
+		} else {
+			
+			$this->addCli();	
 		}
+		
 	}
 
 
 	/*pasa los datos a traves del metodo Ajax desde la vista y los devuelve a estos*/
 	public function view($id){
-
 		/*trae el reg. del modelo*/
 		$data = array(
-			'clientes' => $this->Mclientes->getId($id)
+			'clientes' => $this->Mclientes->getId($id),
 		);
-
 		/*envia la data a la vista*/
 		$this->load->view("admin/clientes/view",$data);
 	}
 
 
 
+
+	/*pasa los datos al formulario a editar*/
 	public function preUpdate($id){
 
 		
 		$data = array(
-			'cliente' => $this->Mclientes->getId($id)
+			'cliente' => $this->Mclientes->getId($id),
+			"tipoClientes" => $this->Mclientes->getTipoClientes(),
+			"tipoDocumentos" => $this->Mclientes->getTipoDocumentos()
 		);
 		
 		$this->load->view('layouts/header');
@@ -99,25 +118,26 @@ class Cclientes extends CI_Controller {
 
 	}
 
+	
+	/*edita los registros */
 	public function update(){
 
 		$id = $this->input->post('id');
 
 		$nombres = $this->input->post('nombres');
-		$apellidos = $this->input->post('apellidos');
 		$telefono = $this->input->post('telefono');
 		$direccion = $this->input->post('direccion');
-		$ruc = $this->input->post('ruc');
-		$empresa = $this->input->post('empresa');
+		$t_cliente = $this->input->post('tipo_cliente');
+		$t_documento = $this->input->post('tipo_documento');
+		$n_documento = $this->input->post('num_documento');
 
 		$data = array(
 			'nombres' => $nombres,
-			'apellidos' => $apellidos,
 			'telefono' => $telefono,
 			'direccion' => $direccion,
-			'ruc' => $ruc,
-			'empresa' => $empresa,
-			'estado' => '1'
+			'tipo_cli_id' => $t_cliente,
+			'tipo_doc_id' => $t_documento,
+			'num_doc' => $n_documento,
 		);
 
 		if($this->Mclientes->updateClientes($id,$data)){
@@ -133,6 +153,8 @@ class Cclientes extends CI_Controller {
 
 
 	}
+
+
 
 	public function delete($id){
 

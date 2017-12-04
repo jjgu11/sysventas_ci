@@ -84,16 +84,16 @@ $(document).ready(function () {
     $(".btn-viewc").on("click",function(){
 
         let cliente = $(this).val();
-        alert(cliente);
+        //alert(cliente);
 
         let dataCliente = cliente.split("*");
 
-        p ="<p><strong>Nombre: </strong>"+dataCliente[1]+"</p>"
-        p +="<p><strong>Apellidos: </strong>"+dataCliente[2]+"</p>"
-        p +="<p><strong>Telefono: </strong>"+dataCliente[3]+"</p>"
-        p +="<p><strong>Direccion: </strong>"+dataCliente[4]+"</p>"
-        p +="<p><strong>Ruc: </strong>"+dataCliente[5]+"</p>"
-        p +="<p><strong>Empresa: </strong>"+dataCliente[6]+"</p>"
+        p ="<h4><strong>Nombre: </strong> <span class='label label-primary'> "+dataCliente[1]+"</span></h4>"
+        p +="<h4><strong>Tipo de Cliente: </strong> <span class='label label-primary'>"+dataCliente[2]+"</span></h4>"
+        p +="<h4><strong>Tipo de Doc.: </strong> <span class='label label-primary'>"+dataCliente[3]+"</span></h4>"
+        p +="<h4><strong>Num de Doc.: </strong> <span class='label label-primary'>"+dataCliente[4]+"</span></h4>"
+        p +="<h4><strong>Telefono: </strong> <span class='label label-primary'>"+dataCliente[5]+"</span></h4>"
+        p +="<h4><strong>Dirección: </strong> <span class='label label-primary'>"+dataCliente[6]+"</span></h4>"
 
         $("#modal-default .modal-body").html(p);
 

@@ -27,11 +27,11 @@
                                         <tr>
                                             <th>#</th>
                                             <th>NOMBRES</th>
-                                            <th>APELLIDOS</th>
+                                            <th>TIPO CLIENTE</th>
+                                            <th>TIPO DOC.</th>
+                                            <th>NUM. DOC.</th>
                                             <th>TELEFONO</th>
                                             <th>DIRECCION</th>
-                                            <th>RUC</th>
-                                            <th>EMPRESA</th>
                                             <th>OPCIONES</th>
                                         </tr>
                                     </thead>
@@ -45,13 +45,13 @@
                                         <tr>
                                             <td><?php echo $cli->id; ?></td>
                                             <td><?php echo $cli->nombres; ?></td>
-                                            <td><?php echo $cli->apellidos; ?></td>
+                                            <td><?php echo $cli->tipocliente; ?></td>
+                                            <td><?php echo $cli->tipodocumento; ?></td>
+                                            <td><?php echo $cli->num_doc; ?></td>
                                             <td><?php echo $cli->telefono; ?></td>
                                             <td><?php echo $cli->direccion; ?></td>
-                                            <td><?php echo $cli->ruc; ?></td>
-                                            <td><?php echo $cli->empresa; ?></td>
 
-                                            <?php $dataCliente = $cli->id."*".$cli->nombres."*".$cli->apellidos."*".$cli->telefono."*".$cli->direccion."*".$cli->ruc."*".$cli->empresa ?>
+                                            <?php $dataCliente = $cli->id."*".$cli->nombres."*".$cli->tipocliente."*".$cli->tipodocumento."*".$cli->num_doc."*".$cli->telefono."*".$cli->direccion ?>
 
                                             <td>
                                                 <div class="btn-group">
@@ -88,7 +88,7 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Informacion de los Clientes</h4>
+                <h3 class="modal-title text-center"><span class="label label-default">INFORMACIÓN DE CLIENTES</span></h3>
               </div>
               <div class="modal-body">
                 
