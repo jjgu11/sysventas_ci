@@ -26,6 +26,12 @@
 
                                 <form action="<?php echo base_url();?>mantenimiento/Cproductos/insertar" method="POST">
 
+                                    <div class="form-group <?php echo !empty(form_error("codigo"))? 'has-error': ''; ?>">
+                                        <label for="codigo">Codigo:</label>
+                                        <input type="text" class="form-control" name="codigo" value="<?php echo set_value('codigo') ?>">
+                                        <?php echo form_error("codigo","<span class='help-block'>","</span>" ); ?>
+                                    </div>                                
+
                                     <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error': ''; ?>">
                                         <label for="nombre">Nombre:</label>
                                         <input type="text" class="form-control" name="nombre" value="<?php echo set_value('nombre') ?>">

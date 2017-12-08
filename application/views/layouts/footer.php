@@ -28,6 +28,14 @@
 
 $(document).ready(function () {
 
+    //-----------------------------------------------------------------------------------------
+    // Mensages de Alerta Cerrar fadeTo(speed, opacity) / slideUp(slow - 400 milliseconds,fast)
+    $(".alert-success").fadeTo(6000, 0.1).slideUp("slow", function(){
+        $(".alert-success").slideUp("slow");
+    });
+    //-----------------------------------------------------------------------------------------
+
+
     /******************************************************/
     /*******************  CATEGORIA ***********************/
     /******************************************************/
@@ -149,15 +157,15 @@ $(document).ready(function () {
     $(".btn-viewp").on("click",function(){
 
         let producto = $(this).val();
-        alert(producto);
+        //alert(producto);
 
         let dataProducto = producto.split("*");
-
-        p ="<h3>Nombre:  <span class='label label-success'>"+dataProducto[1]+"</span></h3>"
-        p +="<h3>Descripcion:  <span class='label label-success'>"+dataProducto[2]+"</span></h3>"
-        p +="<h3>Precio:  <span class='label label-success'>"+dataProducto[3]+"</span></h3>"
-        p +="<h3>Stock:  <span class='label label-success'>"+dataProducto[4]+"</span></h3>"
-        p +="<h3>Categoria:  <span class='label label-success'>"+dataProducto[5]+"</span></h3>"
+        p ="<h3>Codigo:  <span class='label label-success'>"+dataProducto[1]+"</span></h3>"
+        p +="<h3>Nombre:  <span class='label label-success'>"+dataProducto[2]+"</span></h3>"
+        p +="<h3>Descripcion:  <span class='label label-success'>"+dataProducto[3]+"</span></h3>"
+        p +="<h3>Precio:  <span class='label label-success'>"+dataProducto[4]+"</span></h3>"
+        p +="<h3>Stock:  <span class='label label-success'>"+dataProducto[5]+"</span></h3>"
+        p +="<h3>Categoria:  <span class='label label-success'>"+dataProducto[6]+"</span></h3>"
 
 
         $("#modal-default .modal-body").html(p);
@@ -184,18 +192,59 @@ $(document).ready(function () {
     /* Fin Ajax*/
 
 
-
-
-
-
-
     /******************************************************/
     /****************** FIN PRODUCTO **********************/
     /******************************************************/
 
 
 
+    /******************************************************/
+    /************************ VENTAS **********************/
+    /******************************************************/
 
+
+    //paso los datos del select a los inputs
+   $("#comprobantes").on("change",function(){
+
+        option = $(this).val();
+
+        if(option != ""){
+
+            infoComprobante = option.split("*");
+
+            //ocultos hidden
+            $("#idcomprobante").val(infoComprobante[0]);
+            $("#igv").val(infoComprobante[2]);
+
+            $("#serie").val(infoComprobante[3]);
+            $("#numero").val(numeroComprobante(infoComprobante[1]));
+            
+        }else{
+
+            $("#idcomprobante").val(null);
+            $("#igv").val(null);
+
+            $("#serie").val(null);
+            $("#numero").val(null);
+
+        }
+   });
+
+   // Pasa los datos del Modal al input
+   $(document).on("click",".btn-add",function(){
+
+        cliente = $(this).val();
+        infoCliente = cliente.split("*");
+
+        $("#idcliente").val(infoCliente[0]);
+        $("#cliente").val(infoCliente[1]);
+        $("#modal-default").modal("hide");
+
+   }) 
+
+    /******************************************************/
+    /************************FIN  VENTAS ******************/
+    /******************************************************/
 
 	$('#example1').DataTable({
         "language": {
@@ -219,6 +268,33 @@ $('[data-toggle="tooltip"]').tooltip();
     
 $('.sidebar-menu').tree()
 })
+
+
+//Se evalua de la cantidad de "n" comprobates registrados
+// boleta = 1
+// factura = 0
+function numeroComprobante(n){
+
+    if (n >= 99999 && n < 99999) {
+        return Number(n)+1;
+    }
+    if (n >= 9999 && n < 99999) {
+        return "0" + (Number(n)+1);
+    }
+    if (n >= 999 && n < 9999) {
+        return "00" + (Number(n)+1);
+    }
+    if (n >= 99 && n < 999) {
+        return "0000" + (Number(n)+1);
+    }
+    if (n >= 9 && n < 99) {
+        return "0000" + (Number(n)+1);
+    }
+    if (n < 9) {
+        return "00000" + (Number(n)+1);
+    }    
+}
+
 </script>
 </body>
 </html>

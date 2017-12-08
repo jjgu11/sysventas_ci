@@ -72,10 +72,12 @@ class Cclientes extends CI_Controller {
 			);
 
 			if($this->Mclientes->createClientes($data)){
+
+				$this->session->set_flashdata("bien","Cliente guardado con exito!");
 				redirect(base_url()."mantenimiento/Cclientes") ;
 			}else{
 				$this->session->set_flashdata("error","No se pudo guardar el cliente");
-				redirect(base_url()."mantenimiento/Ccliente/addCli");
+				redirect(base_url()."mantenimiento/Cclientes/addCli");
 			}
 
 		#muestra la vista con los mensages de error en los imputs	
@@ -131,31 +133,59 @@ class Cclientes extends CI_Controller {
 		$t_documento = $this->input->post('tipo_documento');
 		$n_documento = $this->input->post('num_documento');
 
-		$data = array(
+		# Obtiene el cliente x su id
+		$clienteActual = $this->Mclientes->getId($id);
+
+		#------- validando --------
+		if ($n_documento == $clienteActual->num_doc) {
+			$is_unique = '';
+		} else {
+			$is_unique = '|is_unique[clientes.num_doc]';
+		}
+
+		#reglas de validaciones
+		$this->form_validation->set_rules("nombres","Nombre del Cliente","required");
+		$this->form_validation->set_rules("tipo_cliente","Tipo de Cliente","required");
+		$this->form_validation->set_rules("tipo_documento","Tipo de Documento","required");
+		$this->form_validation->set_rules("telefono","Telefono del Cliente","required");
+		$this->form_validation->set_rules("direccion","Direccion del Cliente","required");
+		$this->form_validation->set_rules("num_documento","Numero de Documento","required".$is_unique);
+
+		#si procede / guarda la informacion
+		if ($this->form_validation->run()) {
+
+			$data = array(
 			'nombres' => $nombres,
 			'telefono' => $telefono,
 			'direccion' => $direccion,
 			'tipo_cli_id' => $t_cliente,
 			'tipo_doc_id' => $t_documento,
 			'num_doc' => $n_documento,
-		);
+			);
 
-		if($this->Mclientes->updateClientes($id,$data)){
+			if($this->Mclientes->updateClientes($id,$data)){
 
-			redirect(base_url()."mantenimiento/Cclientes") ;
+				$this->session->set_flashdata("bien","<strong>Cliente</strong> Actualizado con exito!!");
+				redirect(base_url()."mantenimiento/Cclientes");
 
+			}else{
+
+				$this->session->set_flashdata("error","No se pudo editar el cliente");
+				redirect(base_url()."mantenimiento/Cclientes/preUpdate").$id;
+
+			}
+
+
+		#muestra los mensages de errores en los imputs	
 		}else{
 
-			$this->session->set_flashdata("error","No se pudo editar el cliente");
-			redirect(base_url()."mantenimiento/Ccliente/preUpdate").$id;
-
+			$this->preUpdate($id);
 		}
-
-
+		
 	}
 
 
-
+	/* Elimina un registro*/
 	public function delete($id){
 
 		$data = array(

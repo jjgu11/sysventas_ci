@@ -45,7 +45,7 @@ class Cproductos extends CI_Controller {
 
 
 		// regla de validacion (nombre_campo_db, alias_mostrar, validacion)
-		//$this->form_validation->set_rules('codigo','codigo Producto','required|is_unique[categorias.nombre]');
+		$this->form_validation->set_rules('codigo','codigo Producto se repite, ','required|is_unique[productos.codigo]');
 		$this->form_validation->set_rules('nombre','nombre Producto','required');
 		$this->form_validation->set_rules('descripcion','descripcion Producto','required');
 		$this->form_validation->set_rules('precio','precio Producto','required');
@@ -55,6 +55,7 @@ class Cproductos extends CI_Controller {
 		if($this->form_validation->run()){
 
 			$data = [
+				'codigo' => $this->input->post('codigo'),
 				'nombre' => $this->input->post('nombre'),
 				'descripcion' => $this->input->post('descripcion'),
 				'precio' => $this->input->post('precio'),
@@ -64,7 +65,7 @@ class Cproductos extends CI_Controller {
 			];
 
 			if($this->Mproductos->createProductos($data)){
-				redirect(base_url()."admin/productos/list");
+				redirect(base_url()."mantenimiento/Cproductos");
 			}else{
 				$this->session->set_flashdata("error","No se pudo guardar la Categoria");
 				redirect(base_url()."mantenimiento/Ccategorias/addPro");
@@ -98,7 +99,7 @@ class Cproductos extends CI_Controller {
 	public function update(){
 
 		$id = $this->input->post('id');
-
+		$codigo = $this->input->post('codigo');
 		$nombre = $this->input->post('nombres');
 		$descripcion = $this->input->post('descripcion');
 		$precio = $this->input->post('precio');
@@ -106,17 +107,18 @@ class Cproductos extends CI_Controller {
 		$categoria = $this->input->post('categoria');
 
 
-		/*$productoActual = $this->Mproductos->getId($id);
+		$productoActual = $this->Mproductos->getId($id);
 
 		//valido si es el mismo registro 
-		if ($nombre == $categoriaActual->nombre) {
+		if ($codigo == $productoActual->codigo) {
 			$unique = '';
 		} else {
-			$unique = '|is_unique[categorias.nombre]';
-		}*/
+			$unique = '|is_unique[productos.codigo]';
+		}
 
 
 		// regla de validacion (nombre_campo_db, alias_mostrar, validacion)
+		$this->form_validation->set_rules('nombres','codigo Producto se repite','required'.$unique);
 		$this->form_validation->set_rules('nombres','nombre Producto','required');
 		$this->form_validation->set_rules('descripcion','descripcion Producto','required');
 		$this->form_validation->set_rules('precio','precio Producto','required');
@@ -125,12 +127,12 @@ class Cproductos extends CI_Controller {
 		if ($this->form_validation->run()){
 			
 			$data = array(
+				'codigo' => $codigo,
 				'nombre' => $nombre,
 				'descripcion'=>$descripcion,
 				'precio'=>$precio, 
 				'stock'=>$stock, 
-				'categoria_id'=>$categoria,
-				'estado' => '1'  
+				'categoria_id'=>$categoria,  
 			);
 
 			if($this->Mproductos->updateProductos($id,$data)){

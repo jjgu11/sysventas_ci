@@ -60,6 +60,7 @@ class Clogin extends CI_Controller {
 
 		if (!$result) {
 
+			// mensage de error
 			$this->session->set_flashdata("error","El usuario y/o Contraseña son incorrectos");
 			
 			redirect(base_url());

@@ -15,10 +15,26 @@
                     <div class="box-body">
                         <div class="row">
                           <div class="col-md-12 text-center">
-                              <a href="<?php echo base_url();?>mantenimiento/Cclientes/addCli" class="btn btn-success btn-flat "><span class="fa fa-plus"></span>Agregar Clientes</a>
+                              <a href="<?php echo base_url();?>mantenimiento/Cclientes/addCli" class="btn btn-success btn-flat "><span class="fa fa-plus-square"></span> Agregar Clientes</a>
                           </div>  
                         </div>
                         <hr>
+
+                        <!-- Mensages de Exitos en las transacciones -->
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <?php if($this->session->flashdata("bien")):?>
+                                    <div class="alert alert-success alert-dismissible">
+                                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> 
+                                      <p><i class="icon fa fa-thumbs-o-up"></i> <?php echo $this->session->flashdata("bien") ?></p>   
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <!--  --> 
+
                         <div class="row">
                             <div class="col-md-12">
                                 <table id="example1" class="table table-bordered table-hover">

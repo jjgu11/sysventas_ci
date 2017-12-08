@@ -26,6 +26,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>CODIGO</th>
                                             <th>NOMBRE</th>
                                             <th>DESCRIPCION</th>
                                             <th>PRECIO</th>
@@ -43,13 +44,14 @@
                                             <?php foreach($productos as $pro): ?>
                                         <tr>
                                             <td><?php echo $pro->id; ?></td>
+                                            <td><?php echo $pro->codigo; ?></td>
                                             <td><?php echo $pro->nombre; ?></td>
                                             <td><?php echo $pro->descripcion; ?></td>
                                             <td><?php echo $pro->precio; ?></td>
                                             <td><?php echo $pro->stock; ?></td>
                                             <td><?php echo $pro->categoria; ?></td>
 
-                                            <?php $dataProducto = $pro->id."*".$pro->nombre."*".$pro->descripcion."*".$pro->precio."*".$pro->stock."*".$pro->categoria ?>
+                                            <?php $dataProducto = $pro->id."*".$pro->codigo."*".$pro->nombre."*".$pro->descripcion."*".$pro->precio."*".$pro->stock."*".$pro->categoria ?>
 
                                             <td>
                                                 <div class="btn-group">

@@ -76,8 +76,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes" class="btn btn-danger btn-flat pull-right">Regresar</a>
+                                        <button type="submit" class="btn btn-success btn-flat"><span class="fa fa-download"></span> Guardar</button>
+                                        <a href="<?php echo base_url();?>mantenimiento/Cclientes" class="btn btn-danger btn-flat pull-right"> <span class="fa fa-reply"></span> Regresar</a>
                                     </div>
                                 </form>
                                <!-- Formulario Agregar -->
