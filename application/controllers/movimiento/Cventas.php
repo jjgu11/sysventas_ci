@@ -22,7 +22,7 @@ class Cventas extends CI_Controller {
 
 	}
 
-
+	//agrega los clientes para la venta
 	public function addVent(){
 
 		$data = [
@@ -36,6 +36,15 @@ class Cventas extends CI_Controller {
 		$this->load->view('admin/ventas/agregar',$data);
 		$this->load->view('layouts/footer');
 
+	}
+
+	// busca los productos para la ventas
+	public function getProductos(){
+
+		$valorAjax = $this->input->post("valor");
+		$clientes = $this->Mventas->getProductos($valorAjax);
+
+		echo json_encode($clientes);
 	}
 
 }

@@ -1,14 +1,21 @@
+        
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 1.0
             </div>
             <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Jcheck AporteFree</a>.</strong> All rights
             reserved.
+            <div class="text-center">
+                <a href="" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i> </a>
+                <a href="" class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i> </a>
+            </div>
         </footer>
     </div>
     <!-- ./wrapper -->
 <!-- jQuery 3 -->
 <script src="<?php echo base_url();?>assets/template/jquery/jquery.min.js"></script>
+<!-- jQuery ui -->
+<script src="<?php echo base_url();?>assets/template/jquery-ui/jquery-ui.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url();?>assets/template/bootstrap/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
@@ -240,7 +247,58 @@ $(document).ready(function () {
         $("#cliente").val(infoCliente[1]);
         $("#modal-default").modal("hide");
 
-   }) 
+   });
+
+   // 
+   $("#producto").autocomplete({
+        source: function(request,response){
+            $.ajax({
+                url: base_url+"movimiento/Cventas/getProductos",
+                type: "POST",
+                dataType: "json",
+                data: {valor: request.term}, // recueperamos la info del campo autocomplete
+                success: function(data){
+                    response(data); //pasamos la respuesta al parametro
+                    console.log(data)
+                }
+            });
+        },
+        minLength:2,
+        select: function(event, ui){ //pasa los datos al seleccionar una info al button
+            data = ui.item.id+"*"+ui.item.codigo+"*"+ui.item.label+"*"+ui.item.precio+"*"+ui.item.stock;
+            $("#btn-agregar").val(data);
+        },
+
+   });
+
+   $("#btn-agregar").on("click", function(){
+        data = $(this).val();
+        
+        
+        if(data != ''){
+
+            console.log("pasar"+data);
+            infoProducto = data.split("*");
+            console.log(infoProducto);
+
+            html = "<tr>";
+            html += "<td>"+infoProducto[1]+"</td>";
+            html += "<td>"+infoProducto[2]+"</td>";
+            html += "<td> S/. "+infoProducto[3]+"</td>";
+            html += "<td>"+infoProducto[4]+"</td>";
+            html += "<td><input type='number' name='cantidades' value='1'></td>";
+            html += "<td> S/. "+infoProducto[3]+"</td>";
+            html += "<td><button type='button' class='btn btn-danger btn-removeP'><span class='fa fa-remove'></span></button></td>";
+            html += "</tr>";
+
+            $("#tbventas tbody").append(html);
+
+        }else{
+
+            alert("Debe seleccionar un Producto!");
+        }
+
+   });
 
     /******************************************************/
     /************************FIN  VENTAS ******************/

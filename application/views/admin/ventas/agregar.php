@@ -47,6 +47,7 @@
                                  
                             </div>
                             <hr>
+
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Cliente:</label>
@@ -64,6 +65,7 @@
                                 </div>
                             </div>
                             <hr>
+
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Producto:</label>
@@ -75,6 +77,7 @@
                                 </div>
                             </div>
                             <hr>
+                            
                             <table id="tbventas" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
