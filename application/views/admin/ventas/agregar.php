@@ -61,7 +61,7 @@
                                 </div> 
                                 <div class="col-md-3">
                                     <label for="">Fecha:</label>
-                                    <input type="date" class="form-control" name="fecha" required>
+                                    <input type="date" class="form-control" name="fecha" value="<?php echo date("Y-m-d");?>" required>
                                 </div>
                             </div>
                             <hr>
@@ -88,7 +88,7 @@
                                         <th>Stock Max.</th>
                                         <th>Cantidad</th>
                                         <th>Importe</th>
-                                        <th></th>
+                                        <th>Remover</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,34 +99,38 @@
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Subtotal:</span>
+                                        <span class="input-group-addon warning">Subtotal:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="subtotal" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon">IGV:</span>
+                                        <span class="input-group-addon warning">IGV:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="igv" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Descuento:</span>
+                                        <span class="input-group-addon warning">Descuento:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="descuento" value="0.00" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Total:</span>
+                                        <span class="input-group-addon warning">Total:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="total" readonly="readonly">
                                     </div>
                                 </div>
                             </div>
                             
+                            <hr>
+                            
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success btn-flat  pull-right btn-block">Guardar</button>
                                 </div>
+                                <div class="col-md-4"></div>
                                 
                             </div>
                         </form>
@@ -174,7 +178,7 @@
                                             <?php $dataCliente = $cli->id."*".$cli->nombres."*".$cli->tipocliente."*".$cli->tipodocumento."*".$cli->num_doc."*".$cli->telefono."*".$cli->direccion ?>
 
                                             <td>
-                                            <button type="button" class="btn btn-warning btn-add" value="<?php echo $dataCliente; ?>" ><span class="fa fa-thumbs-up"></span></button>
+                                            <button type="button" class="btn btn-warning btn-modal-add" value="<?php echo $dataCliente; ?>" ><span class="fa fa-thumbs-up"></span></button>
                                             </td>
                                         </tr>
                                             <?php endforeach; ?>
