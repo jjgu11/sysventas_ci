@@ -6,6 +6,12 @@ class Cventas extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
+
+		# si no existe la variable de session ? redirecciona al login
+		if (!$this->session->userdata('login')) {
+			redirect(base_url());
+		} 
+
 		$this->load->model("Mventas");
 		$this->load->model("Mclientes");
 	}
@@ -45,6 +51,74 @@ class Cventas extends CI_Controller {
 		$clientes = $this->Mventas->getProductos($valorAjax);
 
 		echo json_encode($clientes);
+	}
+
+
+	public function insertarVenta(){
+
+		$fecha = $this->input->post("fecha");
+		$subtotal = $this->input->post("subtotal");
+		$igv = $this->input->post("igv");
+		$descuento = $this->input->post("descuento");
+		$total = $this->input->post("total");
+		$idcomprobante = $this->input->post("idcomprobante");
+		$idcliente = $this->input->post("idcliente");
+		$idusuario = $this->session->userdata("idusuario");
+		$numero_doc = $this->input->post("numero");
+		$serie = $this->input->post("serie");
+
+		//campos ocultos del formulario
+		$idproductos = $this->input->post("idproductos");
+		$precios = $this->input->post("precios");
+		$cantidades = $this->input->post("cantidades");
+		$importes = $this->input->post("importes");
+
+		$dataV = [
+			'fecha' 	  => $fecha,
+			'subtotal'    => $subtotal,
+			'igv' 		  => $igv,
+			'descuento'   => $descuento,
+			'total' 	  => $total,
+			'tipo_com_id' => $idcomprobante,
+			'cliente_id'  => $idcliente,
+			'usuario_id'  => $idusuario,
+			'numdoc'      => $numero_doc,
+			'serie' 	  => $serie,
+
+		];
+
+		if($this->Mventas->createVentas($dataV)){
+
+			$idVentas = $this->Mventas->lastId();
+
+			//llamo el metodo de esta misma clase
+			$this->updateComprobanteCant($idcomprobante);
+
+		}else{
+			redirect(base_url()."movimiento/Cventas/addVent");
+		}
+
+
+	}
+
+	//buscamos el comprobante por su id y actualizamos la cantidada
+	protected function updateComprobanteCant($id){
+
+		//obtengo el comprobante actual
+		$comprobanteActual = $this->Mventas->getComprobantes($id);
+		
+		//aumento el campo cantidad
+		$newCantidad = $comprobanteActual->cantidad + 1;
+
+		$data = [
+			'cantidad' => $newCantidad
+		];
+
+		//envio al modelo para actualizar la new cantidad
+		$this->Mventas->updateTipoComprobanteCant($data);
+
+
+
 	}
 
 }

@@ -9,9 +9,7 @@ class Cdashboard extends CI_Controller {
 
 		# si no existe la variable de session ? redirecciona al login
 		if (!$this->session->userdata('login')) {
-
 			redirect(base_url());
-
 		} 
 
 	}

@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         
-                        <form action="<?php echo base_url();?>movimientos/ventas/store" method="POST" class="form-horizontal">
+                        <form action="<?php echo base_url();?>movimientos/ventas/insertarVenta" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-3">
 
@@ -95,33 +95,53 @@
                                 
                                 </tbody>
                             </table>
+
                             <hr>
+
                             <div class="form-group">
-                                <div class="col-md-3">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-addon warning">Subtotal:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="subtotal" readonly="readonly">
+                                        <input type="text" value="0.00" class="form-control" placeholder="Username" name="subtotal" readonly="readonly">
                                     </div>
-                                </div>
-                                <div class="col-md-3">
+                                </div> 
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-addon warning">IGV:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="igv" readonly="readonly">
+                                        <input type="text" value="0.00" class="form-control" placeholder="Username" name="igv" readonly="readonly">
                                     </div>
-                                </div>
-                                <div class="col-md-3">
+                                </div> 
+                                <div class="col-md-4"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
                                     <div class="input-group">
                                         <span class="input-group-addon warning">Descuento:</span>
                                         <input type="text" class="form-control" placeholder="Username" name="descuento" value="0.00" readonly="readonly">
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <span class="input-group-addon warning">Total:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="total" readonly="readonly">
-                                    </div>
-                                </div>
+                                </div> 
+                                <div class="col-md-4"></div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                     <div class="input-group">
+                                        <span class="input-group-addon warning">Total:</span>
+                                        <input type="text" value="0.00" class="form-control" placeholder="Username" name="total" readonly="readonly">
+                                    </div>
+                                </div> 
+                                <div class="col-md-4"></div>
+                            </div>
+
                             
                             <hr>
                             
