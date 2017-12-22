@@ -69,7 +69,7 @@ class Clogin extends CI_Controller {
 		}else{
 
 			$data = array(
-				'id' => $result->id,
+				'idusuario' => $result->id,
 				'nombre'=> $result->nombres." - ".$result->apellidos,
 				'rol' => $result->rol_id,
 				'login' => TRUE 

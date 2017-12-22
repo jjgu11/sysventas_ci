@@ -14,6 +14,7 @@ class Cventas extends CI_Controller {
 
 		$this->load->model("Mventas");
 		$this->load->model("Mclientes");
+		$this->load->model("Mproductos");
 	}
 
 
@@ -51,6 +52,8 @@ class Cventas extends CI_Controller {
 		$clientes = $this->Mventas->getProductos($valorAjax);
 
 		echo json_encode($clientes);
+
+		//var_dump($clientes);
 	}
 
 
@@ -82,17 +85,26 @@ class Cventas extends CI_Controller {
 			'tipo_com_id' => $idcomprobante,
 			'cliente_id'  => $idcliente,
 			'usuario_id'  => $idusuario,
-			'numdoc'      => $numero_doc,
-			'serie' 	  => $serie,
+			'num_doc'      => $numero_doc,
+			'serie' 	  => $serie
 
 		];
 
+		//var_dump($dataV);
+		// 1- Guardo la venta generada
 		if($this->Mventas->createVentas($dataV)){
 
 			$idVentas = $this->Mventas->lastId();
 
-			//llamo el metodo de esta misma clase
+			var_dump($idVentas);
+
+			// 2- Actualizo la cantidad del comprobante para otra venta
 			$this->updateComprobanteCant($idcomprobante);
+
+			// 3- Inserto el detalle_venta y actualizo el stok del producto  ****** revisar ventaid
+			$this->insertarDetalle($idproductos,$idVentas,$precios,$cantidades,$importes);
+
+			redirect(base_url()."movimiento/Cventas");
 
 		}else{
 			redirect(base_url()."movimiento/Cventas/addVent");
@@ -101,23 +113,62 @@ class Cventas extends CI_Controller {
 
 	}
 
-	//buscamos el comprobante por su id y actualizamos la cantidada
+
+
+	//buscamos el comprobante por su id y actualizamos la cantidad
 	protected function updateComprobanteCant($id){
 
-		//obtengo el comprobante actual
-		$comprobanteActual = $this->Mventas->getComprobantes($id);
+		//obtengo el array del comprobante actual
+		$comprobanteActual = $this->Mventas->getComprobanteId($id);
 		
-		//aumento el campo cantidad
+		//aumento el campo cantidad ++
 		$newCantidad = $comprobanteActual->cantidad + 1;
 
 		$data = [
 			'cantidad' => $newCantidad
 		];
 
-		//envio al modelo para actualizar la new cantidad
-		$this->Mventas->updateTipoComprobanteCant($data);
+		//envio al modelo para actualizar la new cantidad (id del post, campo a actualizar)
+		$this->Mventas->updateTipoComprobanteCant($id,$data);
+
+	}
 
 
+	protected function insertarDetalle($idpro,$idvent,$pre,$cant,$impo){
+
+		for ($i=0; $i < count($idpro) ; $i++) { 
+			
+			$data = [
+				'producto_id' => $idpro[$i],
+				'venta_id' => $idvent,
+				'precio' => $pre[$i],
+				'cantidad' => $cant[$i],
+				'importe' => $impo[$i]
+			];
+
+			//var_dump($data);
+			$this->Mventas->createDetalle($data);
+			$this->UpdateProductoStock($idpro[$i],$cant[$i]);
+
+		}
+
+	}
+
+
+	//rreviasar********
+	protected function UpdateProductoStock($idpro,$cant){
+
+		$productoActual = $this->Mproductos->getId($idpro);
+
+		$newStock = $productoActual->stock - $cant;
+
+		$data = [
+			'stock' => $newStock
+		];
+
+		//var_dump($data);
+
+		$this->Mproductos->updateProductos($idpro,$data);
 
 	}
 

@@ -26,7 +26,6 @@ class Mproductos extends CI_Model {
 
 		$this->db->where('id',$id);
 		$rst= $this->db->get("productos");
-
 		return $rst->row();
 	}
 

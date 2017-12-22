@@ -32,24 +32,37 @@ class Mventas extends CI_Model {
 	//obtiene el ultimo id de la ventas
 	public function lastId(){
 
-		$this->db->insert_id();
+		return $this->db->insert_id();
 	}
 
 
-	public function getComprobantes($idComprobante){
+	// Obtengo el comprobante especificado
+	public function getComprobanteId($idComprobante){
 
 		$this->db->where("id",$idComprobante);
-
 		$resultado = $this->db->get("tipo_comprobante");
-
 		return $resultado->row();
 
 	}
 
+	// Actualizo la new cantidad
 	public function updateTipoComprobanteCant($idComprobante,$data){
 
 		$this->db->where("id",$idComprobante);
 		 $this->db->update("tipo_comprobante",$data);
+	}
+
+	// Actualizo el new Stock
+	public function updateProductoStock($idProducto,$data){
+
+		$this->db->where("id",$idProducto);
+		 $this->db->update("productos",$data);
+	}
+
+	//Guardo el Detalle de la venta
+	public function createDetalle($data){
+
+		$this->db->insert("detalle_venta",$data);
 	}
 
 	

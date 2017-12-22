@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         
-                        <form action="<?php echo base_url();?>movimientos/ventas/insertarVenta" method="POST" class="form-horizontal">
+                        <form action="<?php echo base_url();?>movimiento/Cventas/insertarVenta" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <div class="col-md-3">
 
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Producto:</label>
-                                    <input type="text" class="form-control" id="producto">
+                                    <input type="text" class="form-control" id="producto" placeholder="Buscar productos......">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">&nbsp;</label>
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-flat  pull-right btn-block">Guardar</button>
+                                    <button disabled type="submit" class="btn btn-success btn-flat  pull-right btn-block" id="btn-guardar">Guardar</button>
                                 </div>
                                 <div class="col-md-4"></div>
                                 

@@ -242,33 +242,72 @@ $(document).ready(function() {
 
    // Boton para agregar el detalle de la venta
    $("#btn-agregar").on("click", function(){
+        
         data = $(this).val();
         
         if(data != ''){
 
-            console.log("pasar"+data);
+            //console.log("pasar"+data);
             infoProducto = data.split("*");
-            console.log(infoProducto);
-
-                       
-            html = "<tr>";
-            html += "<td><input type='hidden' name='idproductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
-            html += "<td>"+infoProducto[2]+"</td>";
-            html += "<td <input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>";
-            html += "<td>"+infoProducto[4]+"</td>";
-            html += "<td><input type='text' name='cantidades[]' class='cantidades' value='1'></td>";
-            html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>";
-            html += "<td><button type='button' class='btn btn-danger btn-removeV'><span class='fa fa-remove'></span></button></td>";
-            html += "</tr>";
+            //console.log(infoProducto);
 
 
-            $("#tbventas tbody").append(html);
+            //verificando si el producto ya se registro  ------ (recorrer todo las tr de la tabla) <------ PENDIENTE 22/12/17
+            codproducto = $("#tbventas input.cantidades").closest("tr").find("td:eq(0)").text();
+            //ntr = $("#tbventas input.cantidades").length;
+            console.log(codproducto+ " = "+ infoProducto[1]);
 
-            //llamo la metodo sumar ventas y reseteo los campos
-            sumarVentas();
-            $("#btn-agregar").val(null);
-            $("#producto").val(null);
+
+            //<------ PENDIENTE 22/12/17-------------------
             
+            /*$('#tbventas tr').each(function () {
+     
+                codproductos = $(this).closest("tr").find("td:eq(0)").text();
+
+                console.log(codproductos);
+
+                if (infoProducto[1] == codproductos) {
+
+                    alert("Error ya fue registrado");
+                }
+                 
+            });*/
+
+
+
+
+            // 1- verifico el stock minimo
+            if(infoProducto[4] == 0){
+
+                alert("Producto sin Stock, comuniquese con el Admin");
+
+            // 2- verificando si el producto ya se registro      
+            }else if(infoProducto[1] == codproducto){
+
+                    alert("El producto ya ha sido registrado");
+
+                }else{
+
+                    html = "<tr>";
+                    html += "<td><input type='hidden' name='idproductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
+                    html += "<td>"+infoProducto[2]+"</td>";
+                    html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>";
+                    html += "<td>"+infoProducto[4]+"</td>";
+                    html += "<td><input type='text' name='cantidades[]' class='cantidades' value='1'></td>";
+                    html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>";
+                    html += "<td><button type='button' class='btn btn-danger btn-removeV'><span class='fa fa-remove'></span></button></td>";
+                    html += "</tr>";
+
+
+                    $("#tbventas tbody").append(html);
+                    $("#btn-guardar").removeAttr("disabled");
+
+                    //llamo la metodo sumar ventas y reseteo el botton e input
+                    sumarVentas();
+                    $("#btn-agregar").val(null);
+                    $("#producto").val(null);
+
+                }
 
 
         }else{
@@ -276,40 +315,62 @@ $(document).ready(function() {
             alert("Debe seleccionar un Producto!");
         }
 
+  
    });
+
+
 
    // elimina cada item de la venta
    $(document).on("click",".btn-removeV",function(){
         $(this).closest("tr").remove();
          sumarVentas();
+
+         /*if($("#tbventas tbody").text("")){
+
+            alert("la caja esta vacia");
+         }*/
+    
    });
+
 
    // se modifica las cantidades de los productos
    $(document).on("keyup", "#tbventas input.cantidades", function(){
+        
         cantidad = $(this).val();
         precio = $(this).closest("tr").find("td:eq(2)").text();
+        // genero el importe a pagar
         importe = cantidad * precio;
 
+        //valido si la nueva cantidad es mayor al stock
+         stock = $(this).closest("tr").find("td:eq(3)").text();
+
+         if (cantidad > stock) {
+            alert("La cantidad solicitada supera el limite del Stock permitido");
+            $(this).val("");
+
+         }else{
+
+            //busco el td con el indice de la quinta columna, y selecciono el elemento input e imprimo (p parrafo oculto :)
+            $(this).closest("tr").find("td:eq(5)").children("p").text(importe);
+            $(this).closest("tr").find("td:eq(5)").children("input").val(importe);
+
+            //metodo de calculo
+            sumarVentas();
+         }
+
+        console.log("soy el stock"+stock);
         //console.log(cantidad);
         //console.log(precio);
         //console.log("new inporte"+importe);
         //alert("hola");
-
-
-        //busco el td con el indice de la quinta columna, y selecciono el elemento p e imprimo
-        $(this).closest("tr").find("td:eq(5)").children("p").text(importe);
-        $(this).closest("tr").find("td:eq(5)").children("input").val(importe);
-
-         sumarVentas();
            
    });
-
-
-
-
     /******************************************************/
     /************************FIN  VENTAS ******************/
     /******************************************************/
+
+
+
 
 	$('#example1').DataTable({
         "language": {
@@ -361,7 +422,7 @@ function numeroComprobante(n){
 }
 
 
-   function sumarVentas(){
+function sumarVentas(){
 
     sTotal = 0;
     // recorro toda las filas y sumo los subtotales
