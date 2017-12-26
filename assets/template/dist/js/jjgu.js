@@ -240,6 +240,8 @@ $(document).ready(function() {
 
    });
 
+
+
    // Boton para agregar el detalle de la venta
    $("#btn-agregar").on("click", function(){
         
@@ -365,6 +367,37 @@ $(document).ready(function() {
         //alert("hola");
            
    });
+
+
+
+   //Iformacion de las ventas (Modal y ajax)
+   $(document).on("click",".btn-viewV",function(){
+
+        ventaId = $(this).val();
+        //console.log(ventaId);
+        
+        $.ajax({
+            url : base_url + "movimiento/Cventas/viewVentas",
+            type: "POST",
+            datatype: "html",
+            data: {id:ventaId},
+            success : function(data){
+                $("#modal-default .modal-body").html(data);
+            } 
+        });
+
+   });
+
+   //Imprimir Ventas
+    $(document).on("click",".btn-printV",function(){
+
+        $("#modal-default .modal-body").print({
+            title : "Comprobante de Venta",
+
+        });
+        
+   });
+
     /******************************************************/
     /************************FIN  VENTAS ******************/
     /******************************************************/

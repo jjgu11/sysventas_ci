@@ -34,5 +34,10 @@
 <!-- jjgu.js -->
 <script src="<?php echo base_url();?>assets/template/dist/js/jjgu.js"></script>
 
+
+<!-- jQuery 3 -->
+<script src="<?php echo base_url();?>assets/template/jquery-print/jqueryprint.js"></script>
+
+
 </body>
 </html>

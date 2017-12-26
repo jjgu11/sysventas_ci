@@ -65,6 +65,70 @@ class Mventas extends CI_Model {
 		$this->db->insert("detalle_venta",$data);
 	}
 
+	//listando todas las ventas
+	public function getVentas(){
+
+		$this->db->select("v.*,c.nombres,tc.nombre as tipocomprobante");
+		$this->db->from("ventas v");
+		$this->db->join("clientes c","v.cliente_id = c.id");
+		$this->db->join("tipo_comprobante tc","v.tipo_com_id = tc.id");
+		$resultados = $this->db->get();
+
+		if ($resultados->num_rows() > 0) {
+			
+			//retorna todas los registros
+			return $resultados->result();
+		}else {
+
+			return false;
+		}
+
+
+	}
+
+	//listando solo la venta especifica
+	public function getVenta($id){
+
+		/*select v.*,c.nombres,c.direccion,c.num_doc dni,c.telefono,tc.nombre as tipocomprobante
+		from ventas v
+		join clientes c on v.cliente_id = c.id
+		join tipo_comprobante tc on v.tipo_com_id = tc.id*/
+
+		$this->db->select("v.*,c.nombres,c.direccion,c.num_doc dni,c.telefono,tc.nombre as tipocomprobante");
+		$this->db->from("ventas v");
+		$this->db->join("clientes c","v.cliente_id = c.id");
+		$this->db->join("tipo_comprobante tc","v.tipo_com_id = tc.id");
+		$this->db->where("v.id", $id);
+
+		$resultados = $this->db->get();
+
+		////retorna solo un registro
+		return $resultados->row();
+
+
+	}
+
+	public function getDetalle($id){
+
+		/*
+select dv.*,p.nombre,p.codigo
+from detalle_venta dv
+join productos p on dv.producto_id = p.id
+where dv.venta_id=28*/
+
+		$this->db->select("dv.*,p.nombre,p.codigo");
+		$this->db->from("detalle_venta dv");
+		$this->db->join("productos p","dv.producto_id = p.id");
+		$this->db->where("dv.venta_id", $id);
+
+		$resultados = $this->db->get();
+
+		////retorna mas de 1 registro
+		return $resultados->result();
+
+
+	}
+
 	
 
 

@@ -21,10 +21,14 @@ class Cventas extends CI_Controller {
 	/*Carga lo lista*/
 	public function index()
 	{	
+
+		$data = [
+			'ventas' => $this->Mventas->getVentas()
+		];
 	
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/ventas/list');
+		$this->load->view('admin/ventas/list',$data);
 		$this->load->view('layouts/footer');
 
 	}
@@ -169,6 +173,22 @@ class Cventas extends CI_Controller {
 		//var_dump($data);
 
 		$this->Mproductos->updateProductos($idpro,$data);
+
+	}
+
+	//
+	public function viewVentas(){
+
+		$idVenta = $this->input->post("id");
+
+		$data = [
+			'ventas' => $this->Mventas->getVenta($idVenta),
+			'detalles' => $this->Mventas->getDetalle($idVenta)
+		];
+
+
+		$this->load->view("admin/ventas/view",$data);
+
 
 	}
 

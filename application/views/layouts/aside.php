@@ -48,7 +48,7 @@
                             <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Categorias</a></li>
                             <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Clientes</a></li>
                             <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Productos</a></li>
-                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Ventas</a></li>
+                            <li><a href="<?php echo base_url() ;?>reportes/Cventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
