@@ -8,35 +8,50 @@
                 <small>Ventas</small>
                 </h1>
             </section>
+
+
             <!-- Main content -->
             <section class="content">
+
+                    <!-- Filtro de busqueda de reportes -->
+                    <div class="box box-success">
+                            
+                        <div class="box-header with-border">
+                              <div class="text-center"><h3 class="box-title"><span class="label label-success">Filtros de Reportes</h4></h3></div>
+                              <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                              </div>
+                        </div>
+                              <div class="box-body">
+                                <form action="<?php echo current_url();?>" method="POST" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="" class="col-md-1 control-label">Desde:</label>
+                                        <div class="col-md-3">
+                                            <input type="date" class="form-control" name="fechainicio" value="<?php echo !empty($fechaIni) ? $fechaIni:'';?>">
+                                        </div>
+                                        <label for="" class="col-md-1 control-label">Hasta:</label>
+                                        <div class="col-md-3">
+                                            <input type="date" class="form-control" name="fechafin" value="<?php  echo !empty($fechaFin) ? $fechaFin:'';?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="submit" name="buscar" value="Buscar" class="btn btn-primary">
+                                            <a href="<?php echo base_url(); ?>reportes/Cventas" class="btn btn-danger">Restablecer</a>
+                                        </div>
+                                    </div>
+                                </form>   
+
+                              </div>
+
+                        
+
+                    </div>
+                    <!-- fin Filtros -->
+                        
                 <!-- Default box -->
                 <div class="box box-solid">
                     <div class="box-body">
-                        
-                        <!-- Filtro de busqueda de reportes -->
-                        <div class="row">
-                            <form action="<?php echo current_url();?>" method="POST" class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="text-center"><h4><span class="label label-success">Filtros de Reportes</h4></div><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="col-md-1 control-label">Desde:</label>
-                                    <div class="col-md-3">
-                                        <input type="date" class="form-control" name="fechainicio" value="<?php echo !empty($fechaIni) ? $fechaIni:'';?>">
-                                    </div>
-                                    <label for="" class="col-md-1 control-label">Hasta:</label>
-                                    <div class="col-md-3">
-                                        <input type="date" class="form-control" name="fechafin" value="<?php  echo !empty($fechaFin) ? $fechaFin:'';?>">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="submit" name="buscar" value="Buscar" class="btn btn-primary">
-                                        <a href="<?php echo base_url(); ?>reportes/Cventas" class="btn btn-danger">Restablecer</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <hr>
 
                         <div class="row">
 
@@ -65,7 +80,17 @@
                                                 <tr>
                                                     <td><?php echo $venta->id;  ?></td>
                                                     <td><?php echo  $venta->nombres;?></td>
-                                                    <td><?php echo $venta->tipocomprobante; ?></td>
+                                                    <td>
+                                                        <?php if ($venta->tipocomprobante == "Boleta"): ?>
+                                                            <span class="label label-warning">
+                                                            <?php echo $venta->tipocomprobante; ?>
+                                                            </span>
+                                                            <?php else: ?>
+                                                            <span class="label label-danger">
+                                                            <?php echo $venta->tipocomprobante; ?>
+                                                            </span>    
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <td><?php echo  $venta->num_doc;?></td>
                                                      <td><?php echo  $venta->fecha;?></td>
                                                       <td><?php echo  $venta->total;?></td>
