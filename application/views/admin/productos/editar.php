@@ -32,7 +32,7 @@
                                     
                                     <div class="form-group <?php echo !empty(form_error("codigo"))? 'has-error': ''; ?>">
                                         <label for="codigo">Codigo:</label>
-                                        <input type="text" class="form-control" name="nombres" value="<?php echo !empty(form_error("codigo"))? set_value('codigo'): $productos->codigo; ?>">
+                                        <input type="text" class="form-control" name="codigo" value="<?php echo !empty(form_error("codigo"))? set_value('codigo'): $productos->codigo; ?>">
                                         <?php echo form_error("codigo","<span class='help-block'>","</span>" ); ?>
                                     </div>
 

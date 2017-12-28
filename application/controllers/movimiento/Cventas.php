@@ -159,7 +159,7 @@ class Cventas extends CI_Controller {
 	}
 
 
-	//rreviasar********
+	//actualizando productos
 	protected function UpdateProductoStock($idpro,$cant){
 
 		$productoActual = $this->Mproductos->getId($idpro);
@@ -176,7 +176,7 @@ class Cventas extends CI_Controller {
 
 	}
 
-	//
+	// Ver las ventas en la ventana modal
 	public function viewVentas(){
 
 		$idVenta = $this->input->post("id");

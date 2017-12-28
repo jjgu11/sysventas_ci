@@ -38,6 +38,15 @@
 <!-- jQuery 3 -->
 <script src="<?php echo base_url();?>assets/template/jquery-print/jqueryprint.js"></script>
 
+<!-- data-table export pdf/ excel.... -->
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/buttons.flash.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/buttons.html5.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/jszip.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/pdfmake.min.js"></script>
+<script src="<?php echo base_url();?>assets/template/dataTables-export/js/vfs_fonts.js"></script>
+
 
 </body>
 </html>

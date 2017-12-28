@@ -403,8 +403,29 @@ $(document).ready(function() {
     /******************************************************/
 
 
+    /* Botones para exportar reportes*/
+    $('#exampleReport').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                title: "Listado de Ventas",
+                exportOptions: {
+                    columns: [ 0, 1,2, 3, 4, 5 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                title: "Listado de Ventas",
+                exportOptions: {
+                    columns: [ 0, 1,2, 3, 4, 5 ]
+                }
+                
+            }
+        ]
+    } );
 
-
+    /*Traducir los datatables a español*/
 	$('#example1').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",

@@ -42,8 +42,6 @@ class Cproductos extends CI_Controller {
 
 	public function insertar(){
 
-
-
 		// regla de validacion (nombre_campo_db, alias_mostrar, validacion)
 		$this->form_validation->set_rules('codigo','codigo Producto se repite, ','required|is_unique[productos.codigo]');
 		$this->form_validation->set_rules('nombre','nombre Producto','required');

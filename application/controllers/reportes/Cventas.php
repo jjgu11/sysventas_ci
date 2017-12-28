@@ -12,18 +12,39 @@ class Cventas extends CI_Controller {
 			redirect(base_url());
 		} 
 
+		$this->load->model("Mventas");
 
 	}
 
 
 	/*Carga lo lista*/
-	public function index()
-	{	
+	public function index(){	
 
-	
+		$fechaIni = $this->input->post("fechainicio");
+		$fechaFin = $this->input->post("fechafin");
+
+		//filtro si hay busqueda por fechas de ventas
+		if($this->input->post("buscar")){
+
+			$ventas = $this->Mventas->getVentasDate($fechaIni,$fechaFin);
+
+		}else{
+
+			// retorna todas las ventas
+			$ventas = $this->Mventas->getVentas();
+		}
+
+		// creo el array a enviar
+		$data = [
+			'ventas' => $ventas,
+			'fechaIni' => $fechaIni,
+			'fechaFin' => $fechaFin
+		];
+		
+		// Paso a la vista 
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/reportes/ventas');
+		$this->load->view('admin/reportes/ventas',$data);
 		$this->load->view('layouts/footer');
 
 	}

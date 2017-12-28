@@ -86,7 +86,7 @@ class Mventas extends CI_Model {
 
 	}
 
-	//listando solo la venta especifica
+	//listando solo la venta especifica - para el modal
 	public function getVenta($id){
 
 		/*select v.*,c.nombres,c.direccion,c.num_doc dni,c.telefono,tc.nombre as tipocomprobante
@@ -108,13 +108,14 @@ class Mventas extends CI_Model {
 
 	}
 
+	//listando la venta especifica - para el modal
 	public function getDetalle($id){
 
 		/*
-select dv.*,p.nombre,p.codigo
-from detalle_venta dv
-join productos p on dv.producto_id = p.id
-where dv.venta_id=28*/
+		select dv.*,p.nombre,p.codigo
+		from detalle_venta dv
+		join productos p on dv.producto_id = p.id
+		where dv.venta_id=28*/
 
 		$this->db->select("dv.*,p.nombre,p.codigo");
 		$this->db->from("detalle_venta dv");
@@ -125,6 +126,30 @@ where dv.venta_id=28*/
 
 		////retorna mas de 1 registro
 		return $resultados->result();
+
+
+	}
+
+
+	public function getVentasDate($fi,$ff){
+
+
+		$this->db->select("v.*,c.nombres,tc.nombre as tipocomprobante");
+		$this->db->from("ventas v");
+		$this->db->join("clientes c","v.cliente_id = c.id");
+		$this->db->join("tipo_comprobante tc","v.tipo_com_id = tc.id");
+		$this->db->where("v.fecha >=",$fi);
+		$this->db->where("v.fecha <=",$ff);
+		$resultados = $this->db->get();
+
+		if ($resultados->num_rows() > 0) {
+			
+			//retorna todas los registros
+			return $resultados->result();
+		}else {
+
+			return false;
+		}
 
 
 	}

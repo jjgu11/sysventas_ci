@@ -22,6 +22,9 @@
     <!--style JJGU -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/jjgu.css">
 
+    <!--data-table css -->
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dataTables-export/css/buttons.dataTables.min.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
