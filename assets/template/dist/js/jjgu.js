@@ -35,16 +35,18 @@ $(document).ready(function() {
     /* Fin Ajax*/
 
 
-    /*Metodo Ajax para eliminar la Categoria*/ 
+    /*Metodo Ajax para eliminar la Categoria | Usuarios*/ 
     $(".btn-delete").on("click",function(e){
 
         e.preventDefault();
+        //obtengo la ruta que lleva al controlador
         let ruta = $(this).attr("href");    
 
         $.ajax({
             url: ruta,
             type: "POST",
             success:function(response){
+                //regresa la ruta para recargar nuevamente
                 window.location.href= base_url+response;
                 //console.log(response);
             }
@@ -402,6 +404,27 @@ $(document).ready(function() {
     /************************FIN  VENTAS ******************/
     /******************************************************/
 
+
+    /******************************************************/
+    /********************  ADMIN - USER ********************/
+    /******************************************************/
+
+    $(".btn-viewUser").on("click",function(){
+
+        let user = $(this).val();
+        ///alert(user);
+
+        let dataUser = user.split("*");
+
+        p ="<h4><strong>Nombres: </strong> <span class='label label-primary'> "+dataUser[1]+"</span></h4>"
+        p +="<h4><strong>Apellidos: </strong> <span class='label label-primary'>"+dataUser[2]+"</span></h4>"
+        p +="<h4><strong>Email: </strong> <span class='label label-primary'>"+dataUser[3]+"</span></h4>"
+        p +="<h4><strong>Usuario: </strong> <span class='label label-primary'>"+dataUser[4]+"</span></h4>"
+        p +="<h4><strong>Rol: </strong> <span class='label label-primary'>"+dataUser[5]+"</span></h4>"
+
+        $("#modal-default .modal-body").html(p);
+
+    });
 
     /* Botones para exportar reportes*/
     $('#exampleReport').DataTable( {
