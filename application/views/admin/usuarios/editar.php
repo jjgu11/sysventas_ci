@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+Content Wrapper. Contains page content -->
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -20,7 +20,10 @@
                         <!-- Formulario Agregar -->
                         <form action="<?php echo base_url();?>admin/Cusuarios/update" method="POST">
                             <div class="form-group">
+								
+								<!-- Paso el id por POST | tambien puedo pasar por GET(ruta URL) -->
                             	<input type="hidden" value="<?php echo $usuario->id ?>" name="idusuario">
+
                                 <label for="nombres">Nombres:</label>
                                 <input type="text" id="nombres" name="nombres" class="form-control" value="<?php echo $usuario->nombres; ?>">
                             </div>
@@ -71,4 +74,4 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.content-wrapper

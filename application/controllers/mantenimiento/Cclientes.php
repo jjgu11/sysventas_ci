@@ -201,7 +201,7 @@ class Cclientes extends CI_Controller {
 		}else{
 
 			$this->session->set_flashdata("error","No se pudo eliminar el cliente");
-			redirect(base_url()."mantenimiento/Ccliente/preUpdate").$id;
+			redirect(base_url()."mantenimiento/Ccliente");
 
 		}
 
