@@ -70,9 +70,9 @@ class Clogin extends CI_Controller {
 
 			$data = array(
 				'idusuario' => $result->id,
-				'nombre'=> $result->nombres." - ".$result->apellidos,
-				'rol' => $result->rol_id,
-				'login' => TRUE 
+				'nombre'	=> $result->nombres." - ".$result->apellidos,
+				'rol' 		=> $result->rol_id,
+				'login' 	=> TRUE 
 				);
 
 			$this->session->set_userdata($data);

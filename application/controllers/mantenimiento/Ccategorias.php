@@ -3,9 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ccategorias extends CI_Controller {
 
+	private $permisos;
+
 	public function __construct(){
 
 		parent::__construct();
+
+		// Carga nuestra libreria permisos
+		$this->permisos = $this->back_lib->control();
+
 		$this->load->model("Mcategorias");
 	}
 
@@ -14,7 +20,8 @@ class Ccategorias extends CI_Controller {
 	public function index()
 	{	
 		$data = array(
-			'categorias' =>$this->Mcategorias->getCategorias()
+			'categorias' =>$this->Mcategorias->getCategorias(),
+			'permisos' => $this->permisos
 		);
 
 		$this->load->view('layouts/header');
